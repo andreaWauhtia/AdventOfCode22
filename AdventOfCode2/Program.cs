@@ -51,26 +51,30 @@ namespace AdventOfCode2
         public static void Main(string[] args)
         {
             var partHistory = ReadInput();
+            Part1(partHistory);
+           
+        }
+
+        private static void Part1(string[] partHistory)
+        {
             int result = 0;
-            
-            //Parallel.ForEach(partHistory, part =>
-            foreach (var part in partHistory)
+
+            Parallel.ForEach(partHistory, part =>
             {
-                
+
                 FirstColumn firstColumn;
-                Enum.TryParse(part.Substring(0,1), out firstColumn);
+                Enum.TryParse(part.Substring(0, 1), out firstColumn);
                 SecondColumn secondColumn;
                 Enum.TryParse(part.Substring(2, 1), out secondColumn);
                 bool? partResult = GetPartResult(firstColumn, secondColumn);
                 result += ((int)secondColumn + GetPartResultValue(partResult));
                 Console.WriteLine($"{part} ==> {partResult} ");
-            }//);
+            });
             Console.WriteLine($"Total: {result}");
             Console.ReadKey();
         }
 
      
-
         private static string[] ReadInput()
         {
             return File.ReadAllLines("input.txt");
